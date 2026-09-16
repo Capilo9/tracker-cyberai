@@ -1,0 +1,17 @@
+{
+  "rewrites": [
+    {
+      "source": "/((?!assets/|favicon.svg|reference.png|cyber-ai-logo.png).*)",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    }
+  ]
+}
