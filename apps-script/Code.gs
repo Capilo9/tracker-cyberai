@@ -5,7 +5,7 @@ const PUBLIC_COLUMNS = ['participant_id', 'name', 'institution', 'website', 'vid
 
 function doGet() {
   try {
-    if (!SPREADSHEET_ID || SPREADSHEET_ID === '') {
+    if (!SPREADSHEET_ID || SPREADSHEET_ID === 'GANTI_DENGAN_ID_SPREADSHEET') {
       throw new Error('Isi SPREADSHEET_ID pada Code.gs terlebih dahulu.');
     }
     const sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(SHEET_NAME);
