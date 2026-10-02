@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { configured } from "./api";
-import { COHORT_SIZE, WEBSITE_SUBMISSION_URL } from "./settings";
+import { COHORT_SIZE, WEBSITE_SUBMISSION_URL, PREPOST_SUBMISSION_URL } from "./settings";
 import { WorkspaceProvider, useWorkspace } from "./workspace";
 import { ParticipantsPage, TrackerPage } from "./Pages";
 import { useDashboardTools } from "./useDashboardTools";
@@ -229,17 +229,16 @@ function DashboardApp() {
                   const percentage = total
                     ? Math.round((count / total) * 100)
                     : 0;
+                  const submissionUrl = t === "WEBSITE"
+                    ? WEBSITE_SUBMISSION_URL
+                    : t === "PREPOST" ? PREPOST_SUBMISSION_URL : undefined;
                   return (
                     <a
                       className={`stat-card task-${t}`}
                       key={t}
-                      href={
-                        t === "WEBSITE"
-                          ? WEBSITE_SUBMISSION_URL
-                          : "/tracker?task=" + t
-                      }
-                      target={t === "WEBSITE" ? "_blank" : undefined}
-                      rel={t === "WEBSITE" ? "noopener noreferrer" : undefined}
+                      href={submissionUrl ?? "/tracker?task=" + t}
+                      target={submissionUrl ? "_blank" : undefined}
+                      rel={submissionUrl ? "noopener noreferrer" : undefined}
                     >
                       <div className="stat-top">
                         <span className="task-number">0{i + 1}</span>
@@ -276,9 +275,9 @@ function DashboardApp() {
                         </span>
                         <ArrowUpRight size={16} />
                       </div>
-                      {t === "WEBSITE" && (
+                      {submissionUrl && (
                         <span className="submission-link">
-                          Kumpulkan tugas website <ArrowUpRight size={15} />
+                          {t === "WEBSITE" ? "Kumpulkan tugas website" : "Isi formulir skor Pre-Post Test"} <ArrowUpRight size={15} />
                         </span>
                       )}
                     </a>

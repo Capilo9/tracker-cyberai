@@ -1,4 +1,9 @@
 @import "tailwindcss";
+.task-PREPOST .submission-link {
+  background: #f2ecff;
+  border-top-color: #e6dcfc;
+  color: #7547cc;
+}
 /* Shared workflows */
 .page-title {
   display: flex;
